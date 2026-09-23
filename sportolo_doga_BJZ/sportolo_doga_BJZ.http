@@ -1,0 +1,6 @@
+@sportolo_doga_BJZ_HostAddress = http://localhost:5015
+
+GET {{sportolo_doga_BJZ_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
