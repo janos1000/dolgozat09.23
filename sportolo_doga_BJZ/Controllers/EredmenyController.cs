@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
-using sportolo_doga_BJZ.Moduls;
+using sportolo_doga_BJZ.Moduls.DTO;
 
 namespace sportolo_doga_BJZ.Controllers
 {
@@ -163,5 +163,20 @@ namespace sportolo_doga_BJZ.Controllers
             return NotFound(new { message = "A megadott ID-val nem található sportoló." });
         }
 
+        [HttpGet("osszes-eredmeny-szama")]
+        public IActionResult GetTotalEredmenyCount()
+        {
+            using (var connector = new MySqlConnection(ConnectionString))
+            {
+                connector.Open();
+                string sql = "SELECT COUNT(*) FROM eredmeny";
+
+                using (var cmd = new MySqlCommand(sql, connector))
+                {
+                    long count = Convert.ToInt64(cmd.ExecuteScalar());
+                    return Ok(new { OsszesEredmeny = count });
+                }
+            }
+        }
     }
 }
