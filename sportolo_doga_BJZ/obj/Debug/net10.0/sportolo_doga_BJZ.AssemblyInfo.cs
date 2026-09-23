@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("sportolo_doga_BJZ")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4efc3fabad3f706fa1ed59c7238bbc9fc843ee92")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9d5357a4acca2f1505d548ee0d7d41f817b35fb")]
 [assembly: System.Reflection.AssemblyProductAttribute("sportolo_doga_BJZ")]
 [assembly: System.Reflection.AssemblyTitleAttribute("sportolo_doga_BJZ")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
