@@ -22,7 +22,7 @@ namespace sportolo_doga_BJZ.Controllers
             string sql = "SELECT * FROM eredmeny";
 
             var cmd = new MySqlCommand(sql, connector);
-            var dataReader = cmd.ExecuteReader(); 
+            var dataReader = cmd.ExecuteReader();
 
             while (dataReader.Read())
             {
@@ -135,5 +135,33 @@ namespace sportolo_doga_BJZ.Controllers
             connector.Close();
             return eredmenybyid;
         }
+
+        [HttpGet("sportolo-info")]
+        public IActionResult GetSportoloInfo([FromQuery] int id)
+        {
+            using (var connector = new MySqlConnection(ConnectionString))
+            {
+                connector.Open();
+                string sql = "SELECT name, email FROM sportolo WHERE id = @id";
+
+                using (var cmd = new MySqlCommand(sql, connector))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return Ok(new
+                            {
+                                Name = reader.GetString(0),
+                                Email = reader.GetString(1)
+                            });
+                        }
+                    }
+                }
+            }
+            return NotFound(new { message = "A megadott ID-val nem található sportoló." });
+        }
+
     }
 }

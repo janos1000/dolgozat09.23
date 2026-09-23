@@ -1,4 +1,4 @@
-﻿namespace sportolo_doga_BJZ.Moduls
+﻿namespace sportolo_doga_BJZ.Moduls.DTO
 {
     public class Eredmeny
     {
