@@ -70,5 +70,45 @@ namespace sportolo_doga_BJZ.Controllers
             return erd;
         }
 
+        [HttpPut]
+        public object UpdateEredmeny([FromQuery] int id, [FromBody] Eredmeny eredmeny)
+        {
+            var connector = new MySqlConnection(ConnectionString);
+            connector.Open();
+
+            string sql = @"UPDATE `eredmeny` SET `competition` = @competition, `description` = @description WHERE `id` = @id";
+
+            var cmd = new MySqlCommand(sql, connector);
+
+            cmd.Parameters.AddWithValue("@competition", eredmeny.Competition);
+            cmd.Parameters.AddWithValue("@description", eredmeny.Description);
+            cmd.Parameters.AddWithValue("@id", id);
+
+            cmd.ExecuteNonQuery();
+
+            var updateEredmeny = new Eredmeny
+            {
+                Competition = eredmeny.Competition,
+                Description = eredmeny.Description
+            };
+
+            connector.Close();
+            return new { message = "Sikeres frissítés.", result = updateEredmeny };
+        }
+
+        [HttpDelete]
+        public object DeleteEredmeny(int id)
+        {
+            var connector = new MySqlConnection(ConnectionString);
+            connector.Open();
+
+            var sql = "DELETE FROM eredmeny WHERE Id = @id";
+            var cmd = new MySqlCommand(sql, connector);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+
+            connector.Close();
+            return new { message = "Sikeres törlés!" };
+        }
     }
 }
