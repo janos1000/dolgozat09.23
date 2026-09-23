@@ -110,5 +110,30 @@ namespace sportolo_doga_BJZ.Controllers
             connector.Close();
             return new { message = "Sikeres törlés!" };
         }
+
+        [HttpGet("byId")]
+        public object GetEredmenyById(int id)
+        {
+            var connector = new MySqlConnection(ConnectionString);
+
+            connector.Open();
+
+            var sql = @"SELECT `competition`, `description` FROM `eredmeny`
+                        WHERE `id` = @id;";
+
+            var cmd = new MySqlCommand(sql, connector);
+            cmd.Parameters.AddWithValue("@id", id);
+
+            var datareader = cmd.ExecuteReader();
+            datareader.Read();
+            var eredmenybyid = new
+            {
+                Competitionme = datareader.GetString(0),
+                Description = datareader.GetString(1)
+            };
+
+            connector.Close();
+            return eredmenybyid;
+        }
     }
 }
