@@ -1,3 +1,6 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
   <Project Path="sportolo_doga_BJZ/sportolo_doga_BJZ.csproj" />
 </Solution>
