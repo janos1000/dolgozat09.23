@@ -42,5 +42,33 @@ namespace sportolo_doga_BJZ.Controllers
             return eredmenyek;
         }
 
+        [HttpPost]
+        public object AddNewEredmeny(Eredmeny eredmeny)
+        {
+            var connector = new MySqlConnection(ConnectionString);
+            connector.Open();
+
+            var erd = new Eredmeny
+            {
+                Competition = eredmeny.Competition,
+                Description = eredmeny.Description,
+                PostTime = DateTime.Now,
+                UpdateTime = DateTime.Now
+            };
+
+            var sql = "INSERT INTO eredmeny (Competition, Description, PostTime, UpdateTime)" +
+                "VALUES (@competition, @description, @postTime, @updateTime)";
+            var cmd = new MySqlCommand(sql, connector);
+
+            cmd.Parameters.AddWithValue("@competition", erd.Competition);
+            cmd.Parameters.AddWithValue("@description", erd.Description);
+            cmd.Parameters.AddWithValue("@postTime", erd.PostTime);
+            cmd.Parameters.AddWithValue("@updateTime", erd.UpdateTime);
+
+            cmd.ExecuteNonQuery();
+            connector.Close();
+            return erd;
+        }
+
     }
 }

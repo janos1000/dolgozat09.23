@@ -1,4 +1,6 @@
 
+using Scalar.AspNetCore;
+
 namespace sportolo_doga_BJZ
 {
     public class Program
@@ -18,6 +20,7 @@ namespace sportolo_doga_BJZ
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                app.MapScalarApiReference();
                 app.MapOpenApi();
             }
 
